@@ -1,0 +1,6 @@
+{
+  "name": "TaskFlow - Micro-Task Escrow Network",
+  "description": "The high-trust micro-task network with instant escrow mechanics, verified worker unlocks ($0.80 unlock protocol), and guaranteed milestone payouts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

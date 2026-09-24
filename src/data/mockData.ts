@@ -1,0 +1,326 @@
+import { TaskItem, TransactionItem, DisputeCase } from '../types';
+
+export const APP_LOGOS = {
+  main: 'https://lh3.googleusercontent.com/aida/AEtjO1XuWoqTzpHs-R1YNAc9X6ClYDrK78AssXzAQQSyu4X5W0AZ1rbXHWJF2UKEaknnYXs7mREisKoRVBShT-hVTshN6EPrGGOYD59soA2G0aw__c1Z91vUBon4HcdZa-7NS7gBaQ4Hst-EXBf0jebnMbW2k-SqSZYiKgxrXOjrCw8oDYUIvjV43XpRnmp4xrZXLtAHKi664S9rxoWiTV97dwxXgY4Fdr3c_dHiiRcBz0Y2XBb_4DuWr5GCjBx8',
+  admin: 'https://lh3.googleusercontent.com/aida/AEtjO1WgVZRs9TOla130AAPBAag0AUa8auUk-f0NLS0A5b7cgfjHIOsGbpXt-0zcvA3tKq49987Ff5kzudg3ncgR388LChDZFz0F1MGt_kEIAUZjcToD_jxaRFTiX8xeLxuTHkAlMgI1MhKIlXj0AL7sJCtv5nCe6cAY2lwpKMDATmbFlLU2VL3XrJoXi-WQpNH5EPHq8f2ElKH7ZT3Z3ALb-hIlMmSdhPnDOwfBUdjyAsCsocOT8Dhu6hxQ2q46',
+};
+
+export const HOTLINKED_IMAGES = {
+  techWorkspace: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAEdRsUt8HTqdvs1PTkst_iEwt2B2XixE4uWDgrfK4C-0QBTOpj-Gizc4_7qxzJ9Ed3UtVVrxOl5v5F94JoyVGTP45IBoeUW85u4upl9z2RgJR0Y6XjmU5Cow_YpMmGOqhhFGsCiPOtcDrajln4N1ytUVunrsdQ-n4ryG58UWW8JdZa5BWee0EsNOel4Evunfoxr_X72c2JPdk-cww0BRoCWo4G11aAZp68Hx1Q-vWZSgBwTWiNK531gw',
+  nomadCollateral: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAVCVMpwtSi64b27llCKOPeVIk6hnqGGjxyD04otxOWqLKQI2cB2BJIzeL3Os0485ky6ATFvgs3bpLDWqvZ2v3z3hpYqkR5TK35zrBknAuO-tYda-pgCCtmf1R7THBK2IM6mSx1wXoIdmNU5tG9rkUmK0BSGigC4wDPh_4e4Fsp05jjVh2-i4w3eV6oH8viROymkIS8ZbGwrNW-vOsFrhmBbqkWf04Ptfzz6_K1VtYc3RKGesufjDJ1eA',
+  edgeMarginBoxes: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA5rlrotcJd5i6M5DG62uOuPYLEs6vWL3bZRna6kpWfVhLIq32DFM_HWLsHays8dyB2bbYUaH6eMU8MHp_JKlcCN0C5IeinwEsLxTCDLq1sthKarMYdrW6Ph9jpi6T8WJttCOV-OA2ogYnwbIVf4x8iAW4DYQgcgAURg5B7VXvxWjxBsPb_-umyY8MjvJ8wmAbD-mkS5Y9NTUWvZsyqU6agbrF48s2n2Mu5gmk8Fj-SQHgV47AhS1pIog',
+  taxonomyChart: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA1OFkt9ip17I9tkTLs2iyYVJ0SEXPmdECRodZsg7fv7B7LqzXnk1kxggSKQgr74aq3laSzJ58RcesKz5xRCpED029Fh_GduXS6i0fsuxvAcalKAbK8kTxxWR6G5FXL-25Qogdg7aJkGaVTLJidRW7bBMVrVHy30X5UXdgDxOBcoibMmDLq5dOUeXz6N0-eDeeFGkU7O0TduQ7MyWSISqXBY079YK_xlv1KLrAznRNyrmMMTVO70DT-dg',
+  frameSample01: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQtctYEYJCifffqgZIVizyP__KzX1ontPoQpsIgSPDIWEvXYO3cfHuEHT_V9_PLhMWwjfz-cGE2EvDMSGLg94uGSmMlLKOpdnuNrIThI4sq6nPxkG4Y2dh00ogjsY9ynXK_wi6MyKVVay-HQqtERUwAaUjZ_v2W_jEX5iKgXWXKgqgBJe6_FerDBlNkT4s7AcTVW7S3R9RXOFwDGhOSNgUCgJDdojrPXkatNTDNoDY3emMWvTL2t4Y8A',
+  frameSample02: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDUepo5-L52Rf22SOp7VmwqR2VZDqBLiuRS7ZUFH02eAD3PHjcj096e20kPCJTdeYX_Jf1h5klr83ITw8zfbiNioYo_zN3IWfqzHGi0_v1TasYkSXE5vPNZHAj62YIrAXLFS0DmVeQuJVQeRtOldS7AaEeqzZTTuThI1ynmd7kjuxAWpvHvsn9Ab1_qwErjla2PRtictuGukzWARUozIUuNDpzEKmVAkr8hCSxYJyK4Pmproj2YthDCSA',
+  sampleFrame04: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBErJXruzJs1WFLgCpvVF5tcXsw44wRgHr38ue5Bzs1jzFH1axVk3aExtAKjGdjJl_vjm3qMt0KouUM63lGCqTDidrwbFAOnuTib7pol6mIOHSpsqwv6GkqQvv5fazL0oIKCGiAuE1pKCwRxgE1lvUqqaZ_l1Wxbw5Y-p2RT9U3XfVFZo0G_LbuyfD0BekZo7vrENPMcLpnIiz8DXYJur23ZS1dkjvxTtnwI7IK5gJ-g4ij4lIvueccdQ',
+  workerDelivery014: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDZkPfO9zFv_3SsMYI8sn2FDCv_HcJJRSNJadp7XyMBJJsHNb20l2vGkiHG01kIxNUS3GlIcqEWd5gRfa0hMzf9GVCk9hyF5suwV7iFXRuvgxMF_NTQQBgkMvo5kPdizPAlaW6TeFumLkpn9WczAvqVZr83J14XILgnMzn4-EEGSUQr_rV-s23rS_uR9VEymeXJn1N49el3FavPhdyoHpUSEqhV-XSV7_73pu66Nu10UXkeXB9Hdza-AA',
+  clientDefectFrame: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCxPk6LYk1b9rqd0vlCX0Uf2Ct5K_9J3u4qMva7xECfawQs-FX_zgbRpjnbu6OvJcSlgzpbqS9IhsiX9f6d0-4MXNNVuUxuSYvMqlND9_jdRiJIA3gI-f_vEN-wz1xmIDED9zOq1Uf-uFyhw0pwxJHdfWcVocMbMpnBmPvT7118kcVVDSwa5Az00HPfhHYyS4Lf18w5ZTHpwUHFIodgHprAJ21ghrsU8cAMrjwtHpmY7PyGs54ZRPWpBA',
+  taxonomySection4b: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAPIdoWzMIYYJScOhVGtwfKHKLgR03W9wYrg2OHDdiOX0-NjUzHX_EFHpFz35a1RTycci3OnFlDEkJ3G2XE8Uz6tlI4CynAqMXcl5wPY5Z2bwdwq5cCsghN6bX5tz43ntpHH0haAdQTevgZ1NqEBLqX-V4vSeFq7U1toZfENYNsKwNb3LIR_MiOCfnodWvaQhf47B4qGmBSGfJHJYL_C7uq6kvC9sySDhYgzlKjABVdZJ0M7sO07f5vgQ',
+  sarahJenkins: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCyUzDIMYilLeft8WgewrwVokHjWP31sv4NfsJ3MhIfgNmGKYV5ngBylgY7hiuW1W6yHA-wtob6edcurHQaMKuPlGbI6x2f_OQE3K_jq0JkfEV5IjCuGStwS4vZe_dX4rCh1SYsbXieLRPCcePM4tB1SJKKDQfIoHffp51zj9DKuSxXxHZz4GjNOMk7PpwVo3J1Gc4ITYUtbQAjG_obbyGgKqdO1SUORMt3ujbmGHdbCe9iDnaubYU5pA',
+  exemplarFrame014: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDgH0hAtMboa6MHgC3jc0r11qbJym-h2MpW3lIdXUT6uVZmlB8XHNiyfSOQ6mPd5AfuNQdrHPEujDJTbdjEA8JZ7y7oqIDbc1fCvvC983ZcF1x6YskwdK2iFosbcIm5d3-ndjQiSr_dTv0Mbgbk2k28WPQdyxFadw0yGDx5A19RvH9tfU7ksr64X097MDYwj5EpbHnwjPL1rzjnUB2qCY2g69LabJziEjdna5wYEpD44PvvI-CGmedyQQ',
+  // Aliases for intuitive use
+  sensor_frame: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA5rlrotcJd5i6M5DG62uOuPYLEs6vWL3bZRna6kpWfVhLIq32DFM_HWLsHays8dyB2bbYUaH6eMU8MHp_JKlcCN0C5IeinwEsLxTCDLq1sthKarMYdrW6Ph9jpi6T8WJttCOV-OA2ogYnwbIVf4x8iAW4DYQgcgAURg5B7VXvxWjxBsPb_-umyY8MjvJ8wmAbD-mkS5Y9NTUWvZsyqU6agbrF48s2n2Mu5gmk8Fj-SQHgV47AhS1pIog',
+  sensor_annotated: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBErJXruzJs1WFLgCpvVF5tcXsw44wRgHr38ue5Bzs1jzFH1axVk3aExtAKjGdjJl_vjm3qMt0KouUM63lGCqTDidrwbFAOnuTib7pol6mIOHSpsqwv6GkqQvv5fazL0oIKCGiAuE1pKCwRxgE1lvUqqaZ_l1Wxbw5Y-p2RT9U3XfVFZo0G_LbuyfD0BekZo7vrENPMcLpnIiz8DXYJur23ZS1dkjvxTtnwI7IK5gJ-g4ij4lIvueccdQ',
+  dispute_dossier: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDgH0hAtMboa6MHgC3jc0r11qbJym-h2MpW3lIdXUT6uVZmlB8XHNiyfSOQ6mPd5AfuNQdrHPEujDJTbdjEA8JZ7y7oqIDbc1fCvvC983ZcF1x6YskwdK2iFosbcIm5d3-ndjQiSr_dTv0Mbgbk2k28WPQdyxFadw0yGDx5A19RvH9tfU7ksr64X097MDYwj5EpbHnwjPL1rzjnUB2qCY2g69LabJziEjdna5wYEpD44PvvI-CGmedyQQ',
+  guidelines_rule: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA1OFkt9ip17I9tkTLs2iyYVJ0SEXPmdECRodZsg7fv7B7LqzXnk1kxggSKQgr74aq3laSzJ58RcesKz5xRCpED029Fh_GduXS6i0fsuxvAcalKAbK8kTxxWR6G5FXL-25Qogdg7aJkGaVTLJidRW7bBMVrVHy30X5UXdgDxOBcoibMmDLq5dOUeXz6N0-eDeeFGkU7O0TduQ7MyWSISqXBY079YK_xlv1KLrAznRNyrmMMTVO70DT-dg',
+};
+
+export const INITIAL_TASKS: TaskItem[] = [
+  {
+    id: 'TASK-10482',
+    title: 'AI Data Annotation & Bounding Box Labeling',
+    category: 'AI Data',
+    categoryBadge: 'AI & Machine Learning',
+    difficulty: 'Beginner',
+    estimatedTime: '25 mins',
+    deadline: 'In 2 days',
+    reward: 4.50,
+    unlockFee: 0.80,
+    client: {
+      name: 'TechSolutions Global',
+      verified: true,
+      rating: 4.9,
+      reviewsCount: 142,
+      avatarText: 'TG',
+      completedTasks: 1240
+    },
+    description: 'Annotate street object bounding boxes (pedestrians, vehicles, cyclists) across 40 high-definition dashcam frames. Precise corner boundaries required according to provided visual ontology specs.',
+    tags: ['Image Tagging', 'Bounding Boxes', 'English'],
+    slotsTotal: 100,
+    slotsRemaining: 42,
+    slotsUnlocked: 73,
+    isUnlocked: true
+  },
+  {
+    id: 'TASK-10483',
+    title: 'E-Commerce Catalog Product Categorization & Attribute Extraction',
+    category: 'Data Entry',
+    categoryBadge: 'Catalog Taxonomy',
+    difficulty: 'Beginner',
+    estimatedTime: '15 mins',
+    deadline: 'In 1 day',
+    reward: 3.20,
+    unlockFee: 0.80,
+    client: {
+      name: 'Omnimart Retail',
+      verified: true,
+      rating: 4.8,
+      reviewsCount: 89,
+      avatarText: 'OM',
+      completedTasks: 890
+    },
+    description: 'Review 25 retail listing descriptions and cross-reference structured taxonomy tables. Extract core attributes: material, dimensions, voltage compatibility, and colorway codes.',
+    tags: ['Spreadsheet Skills', 'E-Commerce'],
+    slotsTotal: 100,
+    slotsRemaining: 18,
+    slotsUnlocked: 82,
+    isUnlocked: false
+  },
+  {
+    id: 'TASK-10485',
+    title: 'Technical Translation: English to Spanish App Strings',
+    category: 'Translation',
+    categoryBadge: 'Bilingual API',
+    difficulty: 'Intermediate',
+    estimatedTime: '45 mins',
+    deadline: 'In 3 days',
+    reward: 12.00,
+    unlockFee: 0.80,
+    client: {
+      name: 'NexaMobile Labs',
+      verified: true,
+      rating: 5.0,
+      reviewsCount: 210,
+      avatarText: 'NM',
+      completedTasks: 512
+    },
+    description: 'Translate 180 mobile app localization key-value string pairs from standard English to neutral Latin American Spanish. Preserve programmatic placeholders and character limit allocations.',
+    tags: ['Bilingual ES/EN', 'JSON String Formats'],
+    slotsTotal: 20,
+    slotsRemaining: 5,
+    slotsUnlocked: 15,
+    isUnlocked: false
+  },
+  {
+    id: 'TASK-10488',
+    title: 'Fintech Mobile App UI Usability Feedback & Bug Logging',
+    category: 'QA Testing',
+    categoryBadge: 'Usability QA',
+    difficulty: 'Intermediate',
+    estimatedTime: '35 mins',
+    deadline: 'In 18 hours',
+    reward: 8.50,
+    unlockFee: 0.80,
+    client: {
+      name: 'PaySwift Systems',
+      verified: true,
+      rating: 4.9,
+      reviewsCount: 76,
+      avatarText: 'PS',
+      completedTasks: 380
+    },
+    description: 'Perform end-to-end sandbox wallet deposit, transaction PIN creation, and card tokenization flows on iOS 16+ or Android 13+. Record step-by-step screen taps and report latency bugs.',
+    tags: ['Mobile QA', 'Bug Reporting'],
+    slotsTotal: 50,
+    slotsRemaining: 12,
+    slotsUnlocked: 38,
+    isUnlocked: false
+  },
+  {
+    id: 'TASK-10495',
+    title: 'Medical Podcast Audio Transcription (10 Minutes)',
+    category: 'Transcription',
+    categoryBadge: 'Clinical Audio',
+    difficulty: 'Intermediate',
+    estimatedTime: '40 mins',
+    deadline: 'In 4 days',
+    reward: 7.00,
+    unlockFee: 0.80,
+    client: {
+      name: 'HealthPulse Media',
+      verified: true,
+      rating: 4.7,
+      reviewsCount: 52,
+      avatarText: 'HP',
+      completedTasks: 312
+    },
+    description: 'Transcribe a 10-minute segment featuring an endocrinologist conversation. Adhere strictly to verbatim rules with timestamps on terminology shifts. Punctuation guide provided in dashboard.',
+    tags: ['Audio Transcription', 'Medical Terminology'],
+    slotsTotal: 30,
+    slotsRemaining: 8,
+    slotsUnlocked: 22,
+    isUnlocked: false
+  },
+  {
+    id: 'TASK-10492',
+    title: 'Autonomous Driving Lidar Cloud Point Verification',
+    category: 'AI Data',
+    categoryBadge: '3D Spatial',
+    difficulty: 'Expert',
+    estimatedTime: '55 mins',
+    deadline: 'In 5 days',
+    reward: 12.00,
+    unlockFee: 0.80,
+    client: {
+      name: 'AutoVision Labs',
+      verified: true,
+      rating: 5.0,
+      reviewsCount: 450,
+      avatarText: 'AV',
+      completedTasks: 450
+    },
+    description: 'Inspect 3D vector point-cloud clusters for roadway obstacles. Classify dynamic reflections from true physical vehicles.',
+    tags: ['3D Vector format', 'LiDAR Sensor'],
+    slotsTotal: 30,
+    slotsRemaining: 14,
+    slotsUnlocked: 16,
+    isUnlocked: false
+  }
+];
+
+export const INITIAL_TRANSACTIONS: TransactionItem[] = [
+  {
+    id: 'TXN-DISB-994021',
+    timestamp: 'Just now, 16:22',
+    dateStr: 'May 22, 2025',
+    description: 'Disbursement to Mobile Wallet',
+    subDescription: 'Ref: QJH4928XLP · Safaricom M-Pesa (+254 712 345 678)',
+    type: 'Payout Rail',
+    rail: 'M-Pesa Express',
+    amount: 100.00,
+    isCredit: false,
+    status: 'Disbursed',
+    auditRef: 'QJH4928XLP',
+    category: 'withdrawals'
+  },
+  {
+    id: 'TXN-DSP-8492',
+    timestamp: 'Today, 14:22',
+    dateStr: 'May 22, 2025',
+    description: 'Case DSP-8492: Escrow Claim Hold',
+    subDescription: 'Task TASK-10482: AI Bounding Box Labeling (Sarah Jenkins arbitration)',
+    type: 'Dispute Escrow',
+    rail: 'Multi-Sig Safe Hold',
+    amount: 50.80,
+    isCredit: true,
+    status: 'Arbitrating',
+    auditRef: 'DSP-8492',
+    category: 'disputes'
+  },
+  {
+    id: 'TXN-88491',
+    timestamp: 'Yesterday, 19:40',
+    dateStr: 'May 21, 2025',
+    description: 'TASK-10488: Fintech App UI Usability Feedback',
+    subDescription: 'Client: Apex Labs · Client 5-Star Approval',
+    type: 'Task Bounty',
+    rail: 'TaskFlow Wallet',
+    amount: 8.50,
+    isCredit: true,
+    status: 'Settled',
+    category: 'earnings'
+  },
+  {
+    id: 'TXN-99021',
+    timestamp: 'Yesterday, 18:12',
+    dateStr: 'May 21, 2025',
+    description: 'TASK-10488: Task Access Unlock Fee',
+    subDescription: 'Standard $0.80 Quality Escrow Protocol',
+    type: 'Micro-Unlock',
+    rail: 'M-Pesa Express',
+    amount: 0.80,
+    isCredit: false,
+    status: 'Processed',
+    category: 'unlocks'
+  },
+  {
+    id: 'TXN-84887',
+    timestamp: 'May 21, 11:15',
+    dateStr: 'May 21, 2025',
+    description: 'TASK-10485: Medical Spanish Audio Transcription',
+    subDescription: 'Client: MediHealth Global · Fast Review Payout',
+    type: 'Task Bounty',
+    rail: 'TaskFlow Wallet',
+    amount: 7.50,
+    isCredit: true,
+    status: 'Settled',
+    category: 'earnings'
+  },
+  {
+    id: 'TXN-MP-98214',
+    timestamp: 'May 19, 09:05',
+    dateStr: 'May 19, 2025',
+    description: 'Disbursement to Mobile Wallet',
+    subDescription: 'Ref: MP-98214 · Recipient: Elena Rostova (+254 712 345 678)',
+    type: 'Payout Rail',
+    rail: 'M-Pesa Express',
+    amount: 50.00,
+    isCredit: false,
+    status: 'Disbursed',
+    auditRef: 'MP-98214',
+    category: 'withdrawals'
+  },
+  {
+    id: 'TXN-98441',
+    timestamp: 'May 18, 14:02',
+    dateStr: 'May 18, 2025',
+    description: 'TASK-10482: Unlock Access Fee (Under DSP-8492 Protection)',
+    subDescription: 'Guaranteed $0.80 reimbursement if arbitrator awards bounty',
+    type: 'Micro-Unlock',
+    rail: 'TaskFlow Wallet',
+    amount: 0.80,
+    isCredit: false,
+    status: 'Claimed',
+    category: 'unlocks'
+  },
+  {
+    id: 'TXN-84872',
+    timestamp: 'May 17, 16:50',
+    dateStr: 'May 17, 2025',
+    description: 'TASK-10483: E-Commerce Catalog SKU Attribute Extraction',
+    subDescription: 'Client: RetailFast Inc. · Automated Approval',
+    type: 'Task Bounty',
+    rail: 'TaskFlow Wallet',
+    amount: 3.20,
+    isCredit: true,
+    status: 'Settled',
+    category: 'earnings'
+  }
+];
+
+export const MOCK_DISPUTE: DisputeCase = {
+  id: 'DSP-8492',
+  linkedTaskId: 'TASK-10482',
+  taskTitle: 'AI Data Annotation & Bounding Box Labeling (15 Urban Dashcam Frames)',
+  urgency: 'High Urgency',
+  slaRemaining: '01:14:28',
+  escrowAmount: 50.00,
+  unlockFeeClaim: 0.80,
+  worker: {
+    name: 'Elena Rostova',
+    id: 'USR-4910',
+    email: 'elena.rostova@devnet.io',
+    tier: 'Tier 3',
+    successRate: 98.4,
+    completedTasks: 142,
+    disputesCount: 1
+  },
+  client: {
+    name: 'TechSolutions Global, Inc.',
+    id: 'CLI-9201',
+    email: 'billing@techsolutions.com',
+    tier: 'Enterprise',
+    totalEscrowPaid: '$18.4k',
+    rating: 4.9,
+    rejectionRate: 14.2
+  },
+  clientReason: 'The worker failed precision requirements on Frame 014 and 015. Missed 2 active cyclists on sidewalk perimeter. Furthermore edge tolerances on truck cab exceeded 3px margin. We require immediate 100% escrow cancellation.',
+  clientTimestamp: 'Jan 24, 15:40 UTC',
+  workerRebuttal: 'Client project guide section 4b clearly states: "Exclude non-motorized pedestrians on pedestrian walk zones and sidewalks unless entering active asphalt." The cyclists were stationary on a cafe terrace. Truck IoU is 0.91, well above the 0.85 pass grade.',
+  workerTimestamp: 'Jan 24, 16:05 UTC',
+  automatedIoU: 91.4,
+  thresholdIoU: 85.0,
+  status: 'Under Review',
+  assignedArbitrator: 'Sarah Jenkins (Sr. AI Lead)',
+  auditTrailNotes: 'Evidence reviewed demonstrates worker strictly adhered to Project Taxonomy Specification v2.3 (§4b). The automated computer vision audit recorded 91.4% IoU, comfortably clearing the 85.0% contractual quality threshold. Client\'s blanket rejection without granting standard revision grace constitutes bad-faith escrow clawback. Escrow released in full to worker.'
+};
